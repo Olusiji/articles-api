@@ -14,8 +14,18 @@ class CreateArticlesTable extends Migration
     public function up()
     {
         Schema::create('articles', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->unsignedInteger('user_id')->nullable();
+            $table->string('title');
+            $table->string('author');
+            $table->longText('content');
+            $table->integer('rating');
+            $table->enum('status', ['draft', 'published']);
             $table->timestamps();
+
+            $table->foreign('user_id')
+            ->references('id')
+            ->on('users');
         });
     }
 
