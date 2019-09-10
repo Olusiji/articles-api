@@ -14,3 +14,53 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+
+$router->post('login', [
+     'uses' => 'TokenController@requestToken'
+]);
+
+// $router->delete('logout', [
+//     'uses' => 'TokenController@revokeToken'
+// ]);
+
+// $router->post('refresh_token', [
+//     'uses' => 'TokenController@refreshToken'
+// ]);
+
+
+//Unprotected
+$router->group(['prefix' => 'api/v1'], function() use (&$router){
+    $router->get('/articles', [
+        'uses' => 'ArticleController@list'
+    ]);
+    
+    $router->get('/articles/{id}', [
+        'uses' => 'ArticleController@get'
+    ]);
+    
+    $router->get('/articles/{id}/rating', [
+        'uses' => 'ArticleController@rate'
+    ]);
+ });
+
+
+
+//Protected
+$router->group(['prefix' => 'api/v1', 'middleware' => 'client'], function() use (&$router){
+    $router->post('/articles', [
+        'uses' => 'ArticleController@create'
+    ]);
+
+    $router->put('/articles/{id}', [
+        'uses' => 'ArticleController@update'
+    ]);
+
+    $router->delete('/articles/{id}', [
+        'uses' => 'ArticleController@delete'
+    ]);
+ });
+
+/*$router->get('/articles/{id}/rating', [
+    'uses' => 'ArticleController@rate'
+]);*/
