@@ -62,4 +62,4 @@ networks:
 #Volumes
 volumes:
   dbdata:
-    driver:local
+    driver: local
