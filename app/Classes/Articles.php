@@ -44,8 +44,22 @@ class Articles {
         return "DELETED";
     }
 
-    public function searchForArticles()
+    public function rateArticle($rating, $id)
     {
+        $article = $this->getArticleBy($id);
+        $total_rating = $article->rating * $article->rating_count;
+        $new_rating_count = $article->rating_count + 1;
+        $new_rating = round(($total_rating + $rating) / $new_rating_count, 1);
 
+        $article->rating = $new_rating;
+        $article->rating_count = $new_rating_count;
+        $article->save();
+        return $article->rating;
+    }
+
+    public function searchArticlesByTitle($title)
+    {
+        $article = $this->article_model->where('title', 'like', "%{$title}%")->paginate(10);
+        return $article;
     }
 }

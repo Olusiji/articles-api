@@ -39,8 +39,12 @@ $router->group(['prefix' => 'api/v1'], function() use (&$router){
         'uses' => 'ArticleController@get'
     ]);
     
-    $router->get('/articles/{id}/rating', [
+    $router->post('/articles/{id}/rating', [
         'uses' => 'ArticleController@rate'
+    ]);
+
+    $router->get('/articles/search/title[/{title}]', [
+        'uses' => 'ArticleController@search'
     ]);
  });
 

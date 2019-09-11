@@ -42,13 +42,13 @@ class ArticleController extends Controller
         return Response::create($this->articles->deleteArticle($id),'200');
     }
 
-    public function search()
+    public function search($title)
     {
-        //return Response::create($this->articles->getArticleBy($id),'200');
+        return Response::create($this->articles->searchArticlesByTitle($title),'200');
     }
 
-    public function rate()
+    public function rate(Request $request, $id)
     {
-        //return Response::create($this->articles->getArticleBy($id),'200');
+        return Response::create($this->articles->rateArticle($request->rating, $id),'200');
     }
 }
