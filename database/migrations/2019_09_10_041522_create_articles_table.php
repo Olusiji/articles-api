@@ -19,8 +19,8 @@ class CreateArticlesTable extends Migration
             $table->string('title');
             $table->string('author');
             $table->longText('content');
-            $table->integer('rating');
-            $table->integer('rating_count');
+            $table->integer('rating')->default(0);
+            $table->integer('rating_count')->default(0);
             $table->enum('status', ['draft', 'published']);
             $table->timestamps();
 

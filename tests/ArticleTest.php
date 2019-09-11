@@ -33,7 +33,8 @@ class ArticleTest extends TestCase
             "content"=> "This is the beginning of a long interesting post",
             "status"=> "draft",
             "user_id"=> "1",
-            "rating"=> 0
+            "rating"=> 0,
+            "rating_count"=> 0
         ];
         $this->post("/api/v1/articles", $parameters, $this->headers($user));
         $this->seeStatusCode(200);

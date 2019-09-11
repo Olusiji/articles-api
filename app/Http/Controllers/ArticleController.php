@@ -23,6 +23,16 @@ class ArticleController extends Controller
 
     public function create(Request $request)
     {
+        $this->validate($request, [
+            'title' => 'required|string',
+            'author' => 'required|string',
+            'content' => 'required|string',
+            'status' => 'required',
+            'user_id' => 'required|numeric',
+            'rating' => 'numeric|max:5',
+            'rating_count' => 'numeric|max:0'
+        ]);
+
         $details = $request->all();
         return Response::create($this->articles->createArticle($details),'200');
     }
@@ -49,6 +59,9 @@ class ArticleController extends Controller
 
     public function rate(Request $request, $id)
     {
+        $this->validate($request, [
+            'rating' => 'required|numeric',
+        ]);
         return Response::create($this->articles->rateArticle($request->rating, $id),'200');
     }
 }
