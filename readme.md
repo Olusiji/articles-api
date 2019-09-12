@@ -14,6 +14,7 @@ Run the following command from the project directory.
 
 `sh deploy.sh`
  
+ Make sure to copy the Client Id and Secret Generated to generate access tokens for authenticated endpoints.
 ## API documentation
 
 The postman documentation for the API can be found here [Postman Docs](https://documenter.getpostman.com/view/3272396/SVmsUKnY).
